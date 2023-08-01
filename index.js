@@ -12,7 +12,7 @@ function createDiv(classes) {
   return div;
 }
 
-function createSquareBoard(containerClassName, size = 16) {
+function createSquareGrid(containerClassName, size = 16) {
   const container = document.querySelector(`.${containerClassName}`);
   for (let rowIndex = 0; rowIndex < size; rowIndex++) {
     const row = createDiv('row');
@@ -22,3 +22,7 @@ function createSquareBoard(containerClassName, size = 16) {
     }
   }
 }
+
+window.addEventListener('load', (e) => {
+  createSquareGrid('canvas');
+})
