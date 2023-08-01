@@ -12,12 +12,12 @@ function createDiv(classes) {
   return div;
 }
 
-function createSquareGrid(containerClassName, size = 16) {
+function createSquareGrid(containerClassName, cellsPerRow = 16) {
   const container = document.querySelector(`.${containerClassName}`);
-  for (let rowIndex = 0; rowIndex < size; rowIndex++) {
+  for (let rowIndex = 0; rowIndex < cellsPerRow; rowIndex++) {
     const row = createDiv('row');
     container.appendChild(row);
-    for (let colIndex = 0; colIndex < size; colIndex++) {
+    for (let colIndex = 0; colIndex < cellsPerRow; colIndex++) {
       row.appendChild(createDiv('cell'));
     }
   }
