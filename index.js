@@ -23,6 +23,18 @@ function createSquareGrid(containerClassName, cellsPerRow = 16) {
   }
 }
 
-window.addEventListener('load', (e) => {
+function addCellListeners() {
+  const cells = document.querySelectorAll('.cell');
+  cells.forEach((cell) => {
+    cell.addEventListener('mouseenter', (event) => {
+      console.log(event);
+    });
+  });
+}
+
+function main() {
   createSquareGrid('canvas');
-})
+  addCellListeners();
+}
+
+window.addEventListener('load', main);

@@ -19,3 +19,11 @@ body {
 .cell {
   flex: 1;
 }
+
+.cell-hovered {
+  background-color: black;
+}
+
+.cell:hover {
+  background-color: aqua;
+}
