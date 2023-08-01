@@ -23,12 +23,15 @@ function createSquareGrid(containerClassName, cellsPerRow = 16) {
   }
 }
 
+function handleCell(event) {
+  const cell = event.target;
+  cell.classList.add('cell-hovered');
+}
+
 function addCellListeners() {
   const cells = document.querySelectorAll('.cell');
   cells.forEach((cell) => {
-    cell.addEventListener('mouseenter', (event) => {
-      console.log(event);
-    });
+    cell.addEventListener('mouseenter', handleCell);
   });
 }
 

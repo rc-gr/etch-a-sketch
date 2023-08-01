@@ -23,7 +23,3 @@ body {
 .cell-hovered {
   background-color: black;
 }
-
-.cell:hover {
-  background-color: aqua;
-}
