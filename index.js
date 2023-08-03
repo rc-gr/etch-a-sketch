@@ -23,6 +23,18 @@ function createSquareGrid(containerClassName, cellsPerRow = 16) {
   }
 }
 
+function clearCells() {
+  const cells = document.querySelectorAll('.cell');
+  cells.forEach((cell) => {
+    cell.classList.remove('cell-hovered');
+  });
+}
+
+function addNewCanvasListener() {
+  document.querySelector('.new-canvas')
+    .addEventListener('click', clearCells);
+}
+
 function handleCell(event) {
   const cell = event.target;
   cell.classList.add('cell-hovered');
@@ -38,6 +50,7 @@ function addCellListeners() {
 function main() {
   createSquareGrid('canvas');
   addCellListeners();
+  addNewCanvasListener();
 }
 
 window.addEventListener('load', main);
