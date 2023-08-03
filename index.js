@@ -1,5 +1,8 @@
 const MIN_SQUARES_PER_SIDE = 1;
 const MAX_SQUARES_PER_SIDE = 100;
+const MAX_DARKENING_STEPS = 10;
+const darkeningStepIncrement = 100 / MAX_DARKENING_STEPS;
+let darkeningSteps = [];
 
 function createDiv(classes, id = '') {
   const div = document.createElement('div');
@@ -19,13 +22,17 @@ function createDiv(classes, id = '') {
   return div;
 }
 
-function createSquareGrid(containerClassName, cellsPerRow = 16) {
+function createSquareGrid(containerClassName, squaresPerSide = 16) {
+  darkeningSteps = [...Array(squaresPerSide * squaresPerSide)];
   const container = document.querySelector(`#${containerClassName}`);
-  for (let rowIndex = 0; rowIndex < cellsPerRow; rowIndex++) {
+  let index = 0;
+  for (let rowIndex = 0; rowIndex < squaresPerSide; rowIndex++) {
     const row = createDiv('row');
     container.appendChild(row);
-    for (let colIndex = 0; colIndex < cellsPerRow; colIndex++) {
-      row.appendChild(createDiv('cell', `cell-${rowIndex * cellsPerRow + colIndex}`));
+    for (let colIndex = 0; colIndex < squaresPerSide; colIndex++) {
+      row.appendChild(createDiv('cell', `cell-${index}`));
+      darkeningSteps[index] = 0;
+      index++;
     }
   }
 }
@@ -35,13 +42,17 @@ function addNewCanvasListener() {
     .addEventListener('click', newCanvas);
 }
 
-function getRandomColor() {
-  return `hsl(${Math.floor(Math.random() * 361)}deg 50% 90%)`;
+function getRandomHueDeg() {
+  return Math.floor(Math.random() * 361);
 }
 
 function updateBackgroundColor(event) {
   const cell = event.target;
-  cell.style.backgroundColor = getRandomColor();
+  const cellIndex = +cell.id.substr(5);
+  const darkeningStep = Math.min(darkeningSteps[cellIndex] + 1, MAX_DARKENING_STEPS);
+  cell.style.backgroundColor = 
+    `hsl(${getRandomHueDeg()}deg 50% ${100 - darkeningStep * darkeningStepIncrement}%)`;
+  darkeningSteps[cellIndex] = darkeningStep;
 }
 
 function addCellListeners() {
