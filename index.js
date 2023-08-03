@@ -31,9 +31,13 @@ function addNewCanvasListener() {
     .addEventListener('click', newCanvas);
 }
 
+function getRandomColor() {
+  return `hsl(${Math.floor(Math.random() * 361)}deg 50% 90%)`;
+}
+
 function updateBackgroundColor(event) {
   const cell = event.target;
-  cell.style.backgroundColor = 'black';
+  cell.style.backgroundColor = getRandomColor();
 }
 
 function addCellListeners() {
