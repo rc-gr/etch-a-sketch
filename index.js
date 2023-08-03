@@ -1,8 +1,12 @@
 const MIN_SQUARES_PER_SIDE = 1;
 const MAX_SQUARES_PER_SIDE = 100;
 
-function createDiv(classes) {
+function createDiv(classes, id = '') {
   const div = document.createElement('div');
+
+  if (id !== '') {
+    div.id = id;
+  }
   
   if (typeof classes === 'string') {
     div.classList.add(classes);
@@ -21,7 +25,7 @@ function createSquareGrid(containerClassName, cellsPerRow = 16) {
     const row = createDiv('row');
     container.appendChild(row);
     for (let colIndex = 0; colIndex < cellsPerRow; colIndex++) {
-      row.appendChild(createDiv('cell'));
+      row.appendChild(createDiv('cell', `cell-${rowIndex * cellsPerRow + colIndex}`));
     }
   }
 }
