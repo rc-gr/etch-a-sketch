@@ -1,3 +1,6 @@
+const MIN_SQUARES_PER_SIDE = 1;
+const MAX_SQUARES_PER_SIDE = 100;
+
 function createDiv(classes) {
   const div = document.createElement('div');
   
@@ -23,16 +26,26 @@ function createSquareGrid(containerClassName, cellsPerRow = 16) {
   }
 }
 
-function clearCells() {
-  const cells = document.querySelectorAll('.cell');
-  cells.forEach((cell) => {
-    cell.classList.remove('cell-hovered');
-  });
+function newCanvas() {
+  const numberOfSquaresString = prompt('Enter number of squares per side for the new canvas (1-100):', '16');
+  const numberOfSquares = parseInt(numberOfSquaresString);
+  
+  if (isNaN(numberOfSquares) || 
+      numberOfSquares < MIN_SQUARES_PER_SIDE || 
+      numberOfSquares > MAX_SQUARES_PER_SIDE) {
+    alert('Invalid input!');
+    return;
+  }
+
+  document.getElementById('canvas')
+    .replaceChildren();
+  createSquareGrid('canvas', numberOfSquares);
+  addCellListeners();
 }
 
 function addNewCanvasListener() {
   document.querySelector('.new-canvas')
-    .addEventListener('click', clearCells);
+    .addEventListener('click', newCanvas);
 }
 
 function handleCell(event) {
