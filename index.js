@@ -31,15 +31,15 @@ function addNewCanvasListener() {
     .addEventListener('click', newCanvas);
 }
 
-function addCellHovered(event) {
+function updateBackgroundColor(event) {
   const cell = event.target;
-  cell.classList.add('cell-hovered');
+  cell.style.backgroundColor = 'black';
 }
 
 function addCellListeners() {
   const cells = document.querySelectorAll('.cell');
   cells.forEach((cell) => {
-    cell.addEventListener('mouseenter', addCellHovered);
+    cell.addEventListener('mouseenter', updateBackgroundColor);
   });
 }
 
