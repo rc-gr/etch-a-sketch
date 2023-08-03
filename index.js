@@ -16,7 +16,7 @@ function createDiv(classes) {
 }
 
 function createSquareGrid(containerClassName, cellsPerRow = 16) {
-  const container = document.querySelector(`.${containerClassName}`);
+  const container = document.querySelector(`#${containerClassName}`);
   for (let rowIndex = 0; rowIndex < cellsPerRow; rowIndex++) {
     const row = createDiv('row');
     container.appendChild(row);
@@ -24,6 +24,28 @@ function createSquareGrid(containerClassName, cellsPerRow = 16) {
       row.appendChild(createDiv('cell'));
     }
   }
+}
+
+function addNewCanvasListener() {
+  document.querySelector('#new-canvas')
+    .addEventListener('click', newCanvas);
+}
+
+function addCellHovered(event) {
+  const cell = event.target;
+  cell.classList.add('cell-hovered');
+}
+
+function addCellListeners() {
+  const cells = document.querySelectorAll('.cell');
+  cells.forEach((cell) => {
+    cell.addEventListener('mouseenter', addCellHovered);
+  });
+}
+
+function createCanvas(squaresPerSide = 16) {
+  createSquareGrid('canvas', squaresPerSide);
+  addCellListeners();
 }
 
 function newCanvas() {
@@ -37,32 +59,13 @@ function newCanvas() {
     return;
   }
 
-  document.getElementById('canvas')
+  document.querySelector('#canvas')
     .replaceChildren();
-  createSquareGrid('canvas', numberOfSquares);
-  addCellListeners();
-}
-
-function addNewCanvasListener() {
-  document.querySelector('.new-canvas')
-    .addEventListener('click', newCanvas);
-}
-
-function handleCell(event) {
-  const cell = event.target;
-  cell.classList.add('cell-hovered');
-}
-
-function addCellListeners() {
-  const cells = document.querySelectorAll('.cell');
-  cells.forEach((cell) => {
-    cell.addEventListener('mouseenter', handleCell);
-  });
+  createCanvas(numberOfSquares);
 }
 
 function main() {
-  createSquareGrid('canvas');
-  addCellListeners();
+  createCanvas();
   addNewCanvasListener();
 }
 
