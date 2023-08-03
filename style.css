@@ -10,6 +10,12 @@ body {
 }
 
 .new-canvas {
+  border: none;
+  border-radius: 8px;
+  background-color: rgb(56, 116, 207);
+  color: white;
+  font-size: 16px;
+  font-weight: 800;
   padding: 8px 24px;
   margin-top: 16px;
   margin-bottom: 16px;
@@ -21,9 +27,9 @@ body {
 }
 
 .canvas {
+  border: 2px solid black;
   width: 480px;
   height: 480px;
-  border: 2px solid black;
   display: flex;
   flex-direction: column;
 }
